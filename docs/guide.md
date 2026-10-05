@@ -5,6 +5,10 @@ little Rust) that also runs in a browser. This page gets it onto your machine
 and shows you around. Every feature is in [the complete tour](features.md); how
 the code fits together is in [how it is built](architecture.md).
 
+To try it without installing anything, the web build is at
+<https://crabbtech.github.io/quire/>. It is the whole app except the native
+pieces (the audio interface input, CoreMIDI and the menu bar).
+
 ## Get the code
 
 ```bash
@@ -57,7 +61,7 @@ audio interfaces.
 ### Checks
 
 ```bash
-npm test                    # 277 tests in 31 files, a few seconds
+npm test                    # 278 tests in 31 files, a few seconds
 npx tsc --noEmit            # types
 npm run build               # type-check, then the production bundle in dist/
 (cd src-tauri && cargo check && cargo test -p quire-dsp)   # the Rust side; 7 pitch tests
@@ -80,16 +84,19 @@ runtime needs, and the microphone prompt's wording is
 With `npm run dev` running in another terminal:
 
 ```bash
-npm run shots                    # writes docs/screenshots/*.png and checks the margins
-npm run shots -- --check-only    # the margin checks alone
+npm run shots                    # writes docs/screenshots/*.png and checks every page
+npm run shots -- --check-only    # the checks alone
+npm run shots -- --film          # also records docs/screenshots/quire.gif (needs ffmpeg)
 npm run shots -- --seed 12       # another roll of the spice rack (16 is the README's)
 ```
 
 The script drives a headless Chrome in a throwaway profile, so the journal in
-every picture is the one that session wrote. It exits 1 if any text touches the
-margin rule, and 2 if nothing is answering at the dev server's address. Set
-`CHROME` if Chrome lives somewhere unusual and `QUIRE_URL` to point it at
-another address.
+every picture is the one that session wrote. On every page it visits it checks
+three things: that no text touches the margin rule, that every piece of text
+reaches 4.5:1 against what is behind it (3:1 for large type), and that nothing
+was thrown or logged as an error. It exits 1 on a miss, and 2 if nothing is
+answering at the dev server's address. Set `CHROME` if Chrome lives somewhere
+unusual and `QUIRE_URL` to point it at another address.
 
 ### Serving the web build from a sub-path
 
@@ -99,6 +106,9 @@ sub-path instead (a GitHub Pages project site, say), set `VITE_BASE`:
 ```bash
 VITE_BASE=/quire/ npm run build
 ```
+
+That is what `.github/workflows/deploy.yml` does on every push to `main`, after
+the tests, to publish <https://crabbtech.github.io/quire/>.
 
 ## Finding your way around
 
@@ -113,7 +123,11 @@ The app is an open notebook with three pages, as tabs along the top:
   play and the app listens (mic, interface, MIDI or keyboard) and grades each
   pass.
 - **Learn** is the contents page: eight short paths that stage the bench for
-  you, the practice stamp card, the records, and **the burrow**.
+  you, the practice stamp card, the records, and **the burrow**. In a new
+  journal its right page says where to start.
+
+The spread fills the window, and each page scrolls on its own, so the
+transport and the journal stay put while the bench scrolls.
 
 The inside cover (click the crab and wordmark at the top left, or
 <kbd>⌘</kbd> <kbd>I</kbd> in the Mac app) lists every keyboard shortcut. The

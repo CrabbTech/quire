@@ -109,7 +109,7 @@ writes files where the save dialog says.
 
 ## What the tests pin down
 
-`npm test` runs 277 tests in 31 files; `cargo test -p quire-dsp` (in
+`npm test` runs 278 tests in 31 files; `cargo test -p quire-dsp` (in
 `src-tauri`) runs the Rust detector's 7.
 
 | Area | Test files | What they pin down |
@@ -130,9 +130,26 @@ DevTools protocol with Node's own `fetch` and `WebSocket`: no Puppeteer, no
 Playwright, nothing to install beyond Node 22 and Chrome. It seeds
 `Math.random` (seed 16) so the spice rack rolls the same way every time, stages
 one session at the Mac app's default window size, and writes
-`docs/screenshots/*.png`. On every page it visits, it checks that no text
-touches the vermilion margin rule or leaves the page; `--check-only` runs the
-checks without writing pictures, and a miss exits 1.
+`docs/screenshots/*.png`; `--film` also records the short film at the top of
+the README (frames taken at a steady rate while the session is driven in real
+time, then one ffmpeg pass with a single palette).
+
+On every page it visits, it checks three things, and a miss exits 1
+(`--check-only` runs the checks without writing pictures):
+
+- **Margins.** No text touches the vermilion margin rule or leaves the page.
+- **Contrast.** Every piece of HTML text is measured against what is behind it,
+  opacity included, and must reach 4.5:1 (3:1 for large type). Disabled
+  controls are exempt, and so are the diagrams, where the faint dots are the
+  rest of the neck and are meant to recede.
+- **Errors.** Nothing was thrown, and nothing was logged with `console.error`.
+
+## The live build
+
+`.github/workflows/deploy.yml` runs on every push to `main`: `npm ci`, the
+tests, then `npm run build` with `VITE_BASE=/quire/`, and the bundle goes to
+GitHub Pages at <https://crabbtech.github.io/quire/>. The web build keeps its
+journal in the browser's localStorage, like the Mac app's webview does.
 
 ## Deep links
 

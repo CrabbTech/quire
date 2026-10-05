@@ -25,6 +25,10 @@ melody workbench, the crab canon, and the reasons alongside.
   loops, the spices on its rack, the scales it recommends for soloing (and
   why), a voicing style, a strum or arpeggio pattern (swung where the style
   wants it), a drum pattern and a tempo.
+- The genre row is folded until you want it: it shows the genre in play and
+  its line from the genre book ("Open chords, borrowed ♭VII, tube amp
+  optional."). **All 19 genres** unfolds every genre and the Genre lab,
+  **Fold** puts them away, and the row stays the way you left it.
 - **Genre lab**: build your own. Give it a name, the built-in genre it grooves
   like (its groove, scales and voicings are inherited), a tempo, power chords
   (off, plain chords only, or all), progressions typed one per line as
@@ -68,6 +72,12 @@ melody workbench, the crab canon, and the reasons alongside.
   authentic, plagal, deceptive, half), starting on the tonic or not.
 - Click a card's bar count to cycle it (1, 2, 4, ½ bar); the arrows under a
   guitar grid cycle its voicings.
+- The bench is laid out in the order you use it. Where a loop comes from
+  (*Compose*, a named progression, *New*) sits beside its name. One row of
+  tools runs above the cards: what changes the loop on the left (*Spice it up*,
+  the heat, *Undo*, *A/B*, *Reset*), what takes it away on the right (*Copy
+  tab*, *MIDI*, *Save*). How it is practised (count-in, tempo ramp, the band)
+  is the strip under the cards.
 
 ### The spice rack
 
@@ -377,10 +387,14 @@ other pass.
 
 ### Today and the records
 
-The right page is today: steps done, the day streak, graded passes, and the
-month as a **stamp card** with the crab pressed on every day you practised.
-**Records** keep the best graded pass per drill, the best sprint per neck
-drill and the deepest burrow per genre.
+The right page is today. In a new journal it says where to start: the first
+step of the first path, with what the step asks for and a **Begin** button.
+From then on it leads with the step to take next (the one in hand, else the
+next step of the first path you have begun), above the counters (steps done,
+the day streak, graded passes) and the month as a **stamp card** with the crab
+pressed on every day you practised. **Records** keep the best graded pass per
+drill, the best sprint per neck drill and the deepest burrow per genre; they
+are listed once there are any.
 
 ## Instruments and sound
 
@@ -436,10 +450,20 @@ wordmark (walking while the band plays), the app icon, the canon's cursor on
 the Möbius strip, the verdict's rating, and the stamp pressed on every
 practice day. No emoji.
 
+- **The spread stays put.** It fills the window, and each page scrolls on its
+  own between its running head and its foot, so the transport, the tabs and
+  the journal are in reach wherever the bench is scrolled to. Under 1100px
+  wide the pages stack and the window scrolls instead.
 - Every move the app explains (a spice, a reharmonisation, a mirrored song, a
   loaded save) is written into the **journal** on the right page with the
   time, and kept between sessions under day headings (Today, Yesterday, Mon
-  21 Sep). New lines ink in.
+  21 Sep). New lines ink in. The page shows the six newest lines; *Earlier in
+  the journal* unfolds the rest. A journal with nothing in it yet says what to
+  press, and what will be written.
+- **Inks that read.** Every ink that sets small type reaches 4.5:1 against the
+  paper it is printed on, cream lettering sits on a vermilion deep enough to
+  carry it, and keyboard focus is one ink ring everywhere. `npm run shots`
+  measures the contrast on every page it visits.
 - **Learn** opens on the contents: paths with hand-drawn ticks for finished
   steps; the right page is today and the stamp card.
 - Turning to another page runs as a page turn (View Transitions where the

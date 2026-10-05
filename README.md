@@ -23,12 +23,12 @@
   <a href="LICENSE"><img alt="Licence: MIT" src="https://img.shields.io/badge/licence-MIT-cbc1a9?style=flat-square&labelColor=1d1b17"></a>
 </p>
 
-<p align="center"><a href="#run-it">Run it</a> · <a href="docs/features.md">The complete tour</a> · <a href="#how-it-is-built">How it is built</a> · <a href="docs/guide.md">A quick guide</a></p>
+<p align="center"><a href="https://crabbtech.github.io/quire/"><b>Open it in your browser</b></a> · <a href="#run-it">Run it</a> · <a href="docs/features.md">The complete tour</a> · <a href="#how-it-is-built">How it is built</a> · <a href="docs/guide.md">A quick guide</a></p>
 
 <p align="center">
-  <img src="docs/screenshots/write.png" width="100%" alt="Quire's Write page, an open notebook on a desk: chord cards for A, E, F♯m and Dm with guitar grids and the spice controls; on the right page, the dated journal explaining a borrowed iv and a truck driver's gear change, and what could come next.">
+  <img src="docs/screenshots/quire.gif" width="100%" alt="Fourteen seconds of Quire in use. On the Write page, an open notebook on a desk, the loop plays and each chord card lights in turn; two presses of Spice it up change the loop and a dated journal entry inks in on the right page each time; then the page turns to Jam, where the solo lab follows the chords.">
 </p>
-<p align="center"><sub>Write, in A major, Classic Rock. Two presses of <i>Spice it up</i> turned D into Dm (a borrowed iv) and made every other pass climb a whole step; the journal on the right page says why, in the app's own words, with the time it said it.</sub></p>
+<p align="center"><sub>Fourteen seconds, as recorded by <code>npm run shots -- --film</code>: the loop plays, <i>Spice it up</i> is pressed twice and the journal on the right page says what changed and why, then the page turns to Jam, where the solo lab follows the chords.</sub></p>
 
 ## What it does
 
@@ -42,7 +42,7 @@ OP-1 field's two-octave keyboard. It is the software version of those die-cut
 
 | Page | What happens there |
 | --- | --- |
-| **Learn** | The contents: eight paths of short steps (39 in all), each of which sets the bench up and asks for one thing. Where the app can hear you, it ticks the step off itself. The month as a stamp card, the records, and the burrow. |
+| **Learn** | The contents: eight paths of short steps (39 in all), each of which sets the bench up and asks for one thing. Where the app can hear you, it ticks the step off itself. The step to take next, the month as a stamp card, the records, and the burrow. |
 | **Jam** | Instrument in hand. The chords shrink to a chart and the page goes to one tool: the Solo lab, the Triad lab or the Neck drills. Press play and the app listens (microphone, audio interface, MIDI or the computer keyboard) and grades each pass. |
 | **Write** | The bench: key, mode and genre (19 genres, and a Genre lab for your own), song sections, the chords with every harmonic tool, *What next*, the melody workbench and the crab canon, with the journal alongside. |
 
@@ -53,19 +53,23 @@ OP-1 field's two-octave keyboard. It is the software version of those die-cut
 <p align="center"><sub><b>Jam.</b> Left: the Solo lab over the borrowed Dm, every note numbered from the chord that is sounding. F is marked as a spice (Dm's ♭3, which the A minor pentatonic doesn't have), the grip you already play is ringed, and dashed rings show where to land when A comes back. Right: the Triad lab on the top three strings; the solver's path travels 12 frets a loop, where root position everywhere would travel 52.</sub></p>
 
 <details>
-<summary>More of the journal: the OP-1 field's keys, Learn, and the inside cover</summary>
+<summary>More of the journal: Write up close, the OP-1 field's keys, Learn, and the inside cover</summary>
 <br>
+<img src="docs/screenshots/write.png" width="100%" alt="Quire's Write page: chord cards for A, E, F♯m and Dm with guitar grids and one row of tools above them; on the right page, the dated journal explaining a borrowed iv and a truck driver's gear change, and what could come next.">
+<p align="center"><sub>Write, in A major, Classic Rock. Two presses of <i>Spice it up</i> turned D into Dm (a borrowed iv) and made every other pass climb a whole step; the journal on the right page says why, in the app's own words, with the time it said it.</sub></p>
 <img src="docs/screenshots/write-op1.png" width="100%" alt="The Write page with the instrument set to OP-1: each chord card shows the OP-1 field's 24 keys with the inversion lit.">
 <p align="center"><sub>The same bench on the OP-1 field: each card shows its 24 keys with the inversion that fits one hand.</sub></p>
-<img src="docs/screenshots/learn.png" width="100%" alt="The Learn page: the contents with learning paths and their steps, and on the right page Today, the month's stamp card and the records.">
-<p align="center"><sub>Learn: the contents and, on the right page, Today, the month's stamp card and the records. This journal is brand new, so every counter reads zero and no day is stamped yet.</sub></p>
+<img src="docs/screenshots/learn.png" width="100%" alt="The Learn page in a new journal: the contents with learning paths and their steps, and on the right page a Start here card for the first step, the month's stamp card and the records.">
+<p align="center"><sub>Learn, in a journal nobody has written in yet: the contents and, on the right page, where to start, the month's stamp card (no day stamped so far) and the records.</sub></p>
 <img src="docs/screenshots/inside-cover.png" width="100%" alt="The inside cover: the gloss of the name, a plate of a crab playing guitar on a shore, a line for the owner's name, the keyboard shortcuts and a colophon.">
 <p align="center"><sub>The inside cover, opened from the wordmark: the gloss, a plate, whose journal it is, every keyboard shortcut, and a colophon.</sub></p>
 </details>
 
 **The look.** An open notebook on a desk: a two-page spread with a stitched
 gutter, cream paper with a faint dot grid, a vermilion margin rule, running
-heads and folios. Teaching text is set in Newsreader, headings in Fraunces,
+heads and folios. The spread fills the window and stays put; each page scrolls
+on its own between its head and its foot, so the transport and the journal are
+always in reach. Teaching text is set in Newsreader, headings in Fraunces,
 labels in IBM Plex Mono capitals; harmonic function and note roles keep their
 own inks because they mean something. Apart from one plate on the inside cover,
 the only decoration is a 32×24 pixel crab, placed by hand and drawn as SVG
@@ -146,7 +150,7 @@ flowchart LR
   grading and the burrow are plain TypeScript with no React and no audio in
   them. One hook, `useAppController()`, wires them to React and the audio
   engine; components only render.
-- **277 tests in 31 files**, beside the code they test: every grip in the
+- **278 tests in 31 files**, beside the code they test: every grip in the
   chord-shape library at every root against its chord's formula; every genre's
   spice rack against its own templates; the pitch detector on sine waves at two
   sample rates, a louder second harmonic, a bass low E, a note that starts
@@ -158,11 +162,12 @@ flowchart LR
   and sends what it heard to the page about 47 times a second; the note tracker
   stays in TypeScript, so the microphone, the interface and the tests share one
   set of ears.
-- **Screenshots that are retaken, margins that are checked.** `npm run shots`
-  drives a headless Chrome over the DevTools protocol (nothing to install beyond
-  Node 22 and Chrome), stages a session from a seeded roll of the spice rack,
-  writes the pictures in this README, and exits 1 if any text touches the
-  vermilion margin rule.
+- **Pictures that are retaken, pages that are checked.** `npm run shots` drives
+  a headless Chrome over the DevTools protocol (nothing to install beyond Node
+  22 and Chrome), stages a session from a seeded roll of the spice rack, and
+  writes the pictures and the film in this README. On every page it visits it
+  exits 1 if any text touches the vermilion margin rule, if any text falls
+  under 4.5:1 against the paper behind it, or if anything logged an error.
 - **Nothing to load.** Every sound is synthesised in Web Audio (Karplus-Strong
   strings, small oscillator voices), with no samples; the four typefaces are
   bundled.
@@ -172,8 +177,10 @@ The source map, the Rust side's commands and events, and the deep links are in
 
 ## Run it
 
-You need Node 22 or newer; the Mac app also needs Xcode's command line tools and
-Rust ([rustup](https://rustup.rs)).
+The web build is live at <https://crabbtech.github.io/quire/>: the whole app
+except the native pieces, with nothing to install. To run it yourself you need
+Node 22 or newer; the Mac app also needs Xcode's command line tools and Rust
+([rustup](https://rustup.rs)).
 
 ```bash
 git clone https://github.com/CrabbTech/quire.git
@@ -181,7 +188,7 @@ cd quire
 npm ci
 npm run dev            # the journal in a browser, at http://localhost:1430
 npm run tauri dev      # or as the Mac app (the first run compiles the Rust side)
-npm test               # 277 tests, a few seconds
+npm test               # 278 tests, a few seconds
 npm run tauri build    # Quire.app and a .dmg in src-tauri/target/release/bundle/
 ```
 

@@ -7,7 +7,7 @@ now match this repository: Quire used to live in `v2/` of
 [CrabbTech/spicerack](https://github.com/CrabbTech/spicerack), and that prefix
 is gone. Branch names such as `claude/spicerack-journal-redesign-swzb1h` and
 `claude/quire-mac-app` refer to that original repository. Test counts are as
-they stood at the time; the suite has since grown to 277.
+they stood at the time; the suite has since grown to 278.
 
 ---
 
