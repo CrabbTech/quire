@@ -312,7 +312,7 @@ async function main() {
     await page.click('Let the crab in');
     await page.click('Mirror the chords');
     await page.click('Crab-proof', { settle: 900 });
-    await page.viewport(WINDOW.width, 1240);
+    await page.viewport(WINDOW.width, 1370);
     await page.scrollToHeading('Melody workbench');
     await sleep(900);
     await take('melody-and-crab-canon.png', 'Write, melody and crab canon');

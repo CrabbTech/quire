@@ -733,7 +733,8 @@ text.mr-chord { font-family: var(--serif); font-weight: 600; font-size: 13px; fi
 /* the step to take next: on a new journal, where to start */
 .next-up { margin: 2px 0 16px; padding: 10px 12px 12px; border: 1px solid var(--line-2); border-left: 3px solid var(--accent); border-radius: var(--radius); background: var(--paper); }
 .next-up-kicker { font-family: var(--mono); font-size: 9.5px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent-ink); }
-.next-up-title { font-family: var(--display); font-weight: 500; font-size: 19px; line-height: 1.2; margin: 3px 0 4px; font-variation-settings: 'opsz' 24, 'SOFT' 30; }
+.next-up-title { font-family: var(--display); font-weight: 500; font-size: 19px; line-height: 1.2; margin: 3px 0 1px; font-variation-settings: 'opsz' 24, 'SOFT' 30; }
+.next-up-where { font-size: 12.5px; font-style: italic; color: var(--dim); margin-bottom: 7px; }
 .next-up-task { font-size: 13px; color: var(--dim); margin-bottom: 10px; }
 .records-empty { font-size: 13px; font-style: italic; color: var(--dim); }
 

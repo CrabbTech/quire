@@ -105,8 +105,9 @@ export function LearnView() {
             )}
             {nextPath && nextStep && (
               <div className="next-up">
-                <div className="next-up-kicker">{isNew ? 'Start here' : 'Next up'} · {nextPath.name}, step {nextPath.steps.indexOf(nextStep) + 1} of {nextPath.steps.length}</div>
+                <div className="next-up-kicker">{isNew ? 'Start here' : 'Next up'}</div>
                 <div className="next-up-title">{nextStep.title}</div>
+                <div className="next-up-where">{nextPath.name} · step {nextPath.steps.indexOf(nextStep) + 1} of {nextPath.steps.length}</div>
                 <div className="next-up-task">{nextStep.task}</div>
                 <button className="btn btn-spice" onClick={() => startLesson(nextStep)}>{isNew ? '▶ Begin' : '▶ Go on'}</button>
               </div>
