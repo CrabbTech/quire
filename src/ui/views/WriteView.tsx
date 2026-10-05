@@ -32,8 +32,8 @@ export function KeyGenreControls() {
         </div>
       </div>
       <div className="control-row">
-        <span className="control-label">Genre</span>
         <div className="genre-picker">
+          <span className="control-label">Genre</span>
           {allGenres.map((g) => (
             <button key={g.id} className={`chip genre-chip ${g.id === state.genreId ? 'chip-on' : ''}`} onClick={() => dispatch({ type: 'genre', genre: g })} title={g.tagline}>
               {g.name}

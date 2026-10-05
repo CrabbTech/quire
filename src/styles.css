@@ -32,7 +32,10 @@
   --mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
   --pixel: 'Silkscreen', 'IBM Plex Mono', monospace;
   --gap: 14px;
-  --margin: 46px;
+  --margin: 60px;      /* how far the text block is indented: room for the longest margin note */
+  --rule-inset: 14px;  /* the margin rule stands this far left of the text block */
+  --note-gap: 8px;     /* margin notes stop this far short of the rule */
+  --note-inset: calc(var(--rule-inset) + var(--note-gap));
   --ease-out: cubic-bezier(.2, .7, .2, 1);
   --ease-in: cubic-bezier(.4, 0, .8, .4);
 }
@@ -156,7 +159,7 @@ select { font-family: var(--mono); font-size: 11px; }
 }
 
 .page { display: flex; flex-direction: column; min-width: 0; padding: 14px 22px 12px; }
-.page-right { --margin: 40px; padding-left: 16px; padding-right: 20px; }
+.page-right { --margin: 54px; padding-left: 16px; padding-right: 20px; }
 .gutter { position: relative; }
 .gutter::before {
   content: ''; position: absolute; top: 16px; bottom: 16px; left: 50%;
@@ -187,7 +190,7 @@ select { font-family: var(--mono); font-size: 11px; }
 
 .page-body { flex: 1; position: relative; padding-left: var(--margin); }
 .page-body::before {
-  content: ''; position: absolute; top: -14px; bottom: -18px; left: calc(var(--margin) - 14px);
+  content: ''; position: absolute; top: -14px; bottom: -18px; left: calc(var(--margin) - var(--rule-inset));
   border-left: 1px solid var(--accent); opacity: .55;
 }
 
@@ -203,10 +206,18 @@ select { font-family: var(--mono); font-size: 11px; }
 
 .controls { display: flex; flex-direction: column; gap: 8px; padding: 4px 0 12px; border-bottom: 1px solid var(--line); margin-bottom: 4px; }
 .control-row { position: relative; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; min-height: 28px; }
-.controls .control-label, .section-bar > .control-label {
-  position: absolute; left: calc(-1 * var(--margin)); top: 9px;
-  width: calc(var(--margin) - 22px); text-align: right;
+/* Notes in the margin (KEY, GENRE, SONG). Each is a zero-width item on the first line of the row it
+   labels, so it centres on that line whatever the row holds; the word hangs to its left, set flush
+   right a fixed gap short of the rule. A longer word grows away from the rule, never across it.
+   The 1.6px is the tracking after the last letter. */
+.controls .control-label, .section-bar > .control-label:first-child {
+  flex: none; width: 0; align-self: center;
+  display: flex; justify-content: flex-end; white-space: nowrap;
+  margin-left: calc(1.6px - var(--note-inset));
+  margin-right: calc(var(--note-inset) - 1.6px - var(--row-gap));
 }
+.control-row, .section-bar { --row-gap: 8px; }  /* these match each row's own gap */
+.genre-picker { --row-gap: 5px; }
 .key-picker { display: flex; border: 1px solid var(--line-2); border-radius: var(--radius); overflow: hidden; background: var(--paper); }
 .key-picker button { border: none; border-right: 1px solid var(--line); border-radius: 0; background: transparent; width: 38px; padding: 6px 0; font-family: var(--serif); font-size: 13px; text-transform: none; letter-spacing: 0; color: var(--dim); }
 .key-picker button:last-child { border-right: none; }
@@ -226,8 +237,7 @@ select { font-family: var(--mono); font-size: 11px; }
 .col-left > .panel, .jam-tool > .panel { counter-increment: sec; }
 .col-left > .panel::before, .jam-tool > .panel::before {
   content: counter(sec, decimal-leading-zero);
-  position: absolute; left: calc(-1 * var(--margin)); top: 20px;
-  width: calc(var(--margin) - 22px); text-align: right;
+  position: absolute; right: calc(100% + var(--note-inset)); top: 20px;
   font-family: var(--pixel); font-size: 10px; color: var(--accent); line-height: 1;
 }
 .panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
@@ -254,6 +264,7 @@ select { font-family: var(--mono); font-size: 11px; }
 .arr-now { background: var(--accent); border-color: var(--accent); color: var(--paper); }
 .arr-add { border-style: dashed; }
 .band-label { margin-left: 10px; }
+.section-bar > .band-label { width: auto; }
 
 /* ---------- practice strip ---------- */
 
@@ -473,7 +484,7 @@ button.bars-tag:hover { border-color: var(--line-2); }
 .journal-day > .journal-entry:first-child, .journal-dayhead + .journal-entry { border-top: none; }
 .journal-day:first-child > .journal-entry:first-child { padding-top: 0; }
 .journal-day:first-child > .journal-entry:first-child .journal-time { top: 2px; }
-.journal-time { position: absolute; left: calc(-1 * var(--margin)); top: 9px; width: calc(var(--margin) - 16px); text-align: right; font-family: var(--mono); font-size: 9.5px; letter-spacing: .3px; color: var(--faint); font-variant-numeric: tabular-nums; }
+.journal-time { position: absolute; right: calc(100% + var(--note-inset)); top: 9px; white-space: nowrap; font-family: var(--mono); font-size: 9.5px; letter-spacing: .3px; color: var(--faint); font-variant-numeric: tabular-nums; }
 .journal-title { font-weight: 600; font-size: 13.5px; line-height: 1.3; }
 .journal-spice .journal-title { color: var(--accent-ink); }
 .journal-spice .journal-title::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--accent); margin-right: 7px; vertical-align: 1px; }
