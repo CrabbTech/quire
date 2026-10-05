@@ -1,3 +1,16 @@
+# Development notes
+
+These are working notes, written at the end of each development session for
+whoever picked the work up next, and kept as a record of why things are the
+way they are. They stand as they were written, oldest first, except that paths
+now match this repository: Quire used to live in `v2/` of
+[CrabbTech/spicerack](https://github.com/CrabbTech/spicerack), and that prefix
+is gone. Branch names such as `claude/spicerack-journal-redesign-swzb1h` and
+`claude/quire-mac-app` refer to that original repository. Test counts are as
+they stood at the time; the suite has since grown to 277.
+
+---
+
 # Handoff — Quire, next session
 
 Everything below is committed and pushed on `claude/spicerack-journal-redesign-swzb1h`.
@@ -88,7 +101,7 @@ in mono capitals; prose in the serif; every teaching line stays.
 - A Tauri window title and `productName` say Quire; `npx tauri icon` was not
   re-run (the icon is unchanged).
 
-**How to run:** `cd v2 && npm install && npm run dev` (browser, port 1430) or
+**How to run:** `npm install && npm run dev` (browser, port 1430) or
 `npm run tauri dev`. Tests: `npm test`. Deep link that skips session resume:
 `?genre=pop&tonic=A&view=write&prog=I,vi,IV,V`.
 
@@ -97,7 +110,7 @@ in mono capitals; prose in the serif; every teaching line stays.
 # Handoff — the Mac app (`claude/quire-mac-app`)
 
 **What happened.** Quire became a proper macOS application, built on the
-journal branch. The Tauri shell (`v2/src-tauri`) grew:
+journal branch. The Tauri shell (`src-tauri`) grew:
 
 - `crates/quire-dsp` — the YIN pitch detector ported from `src/input/pitch.ts`
   to Rust, with the same tests (sine sweeps, loud 2nd harmonic, bass E1 with
