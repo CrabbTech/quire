@@ -224,6 +224,15 @@ describe('digging', () => {
     expect(closingLine({ ...run, ended: 'quit' }, 'Pop', 9).text).toBe('Came up at the surface. Nothing dug, nothing landed.');
   });
 
+  it('only calls ground shallow when the descent ended shallow', () => {
+    const run = startRun('pop-punk', 'major', 0, GENRES['pop-punk'].templates[0]);
+    const floor = (depth: number): BurrowFloor => ({ depth, strata: strataName(depth), before: [], after: [], changed: [0], steps: [], hearBoth: depth < 4, wanted: 1 });
+    const dug = (n: number) => closingLine({ ...run, floors: Array.from({ length: n }, (_, i) => floor(i + 1)), ended: 'bedrock' }, 'Pop Punk', 12).text;
+    expect(dug(2)).toContain('Bedrock: Pop Punk is shallow ground, 12 spices on its rack and the loop has used what fits.');
+    expect(dug(7)).toContain('Bedrock: Pop Punk has 12 spices on its rack and the loop has used what fits.');
+    expect(dug(7)).not.toContain('shallow');
+  });
+
   it('has nothing to dig under when every loop is too long', () => {
     expect(pickSurface([{ name: 'Twelve', mode: 'major', numerals: Array(12).fill('I7') }], mulberry32(1))).toBeUndefined();
     expect(pickSurface(GENRES.blues.templates, mulberry32(1))).toBeDefined();

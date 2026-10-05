@@ -1,6 +1,6 @@
 //! The interface as an instrument input. One thread owns the Core Audio (cpal)
 //! input stream for the chosen device and channel, keeps a rolling window of
-//! samples, and every hop runs the pitch detector on it — then tells the
+//! samples, and every second hop runs the pitch detector on it — then tells the
 //! webview what it heard. Nothing heavy happens in the audio callback: it only
 //! de-interleaves the wanted channel and hands the chunk over.
 //!
@@ -163,7 +163,7 @@ fn build_stream(device: &cpal::Device, config: &cpal::SupportedStreamConfig, pic
     stream.map_err(|e| e.to_string())
 }
 
-/// The analysis loop: a rolling window, looked at every hop, until Stop.
+/// The analysis loop: a rolling window, looked at every `EMIT_EVERY` hops, until Stop.
 fn analyse(app: AppHandle, rx: Receiver<Msg>, sample_rate: f32, low: bool, device: String) {
     let window = if low { 4096 } else { 2048 };
     let opts = if low { PitchOptions::BASS } else { PitchOptions::default() };

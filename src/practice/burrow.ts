@@ -18,6 +18,8 @@ import { ProgressionTemplate } from '../data/genres';
 
 /** A loop never grows past this: eight chords is as much as an ear can hold, and as much as a bench row shows well. */
 export const MAX_SLOTS = 8;
+/** bedrock above this floor is "shallow ground": the floors that still play both loops */
+const SHALLOW = 4;
 
 /** What the crab is digging through, floor by floor. */
 export const STRATA = ['sand', 'grit', 'wet sand', 'clay', 'peat', 'silt', 'gravel', 'marl', 'chalk', 'flint', 'slate', 'granite'];
@@ -342,9 +344,13 @@ export function closingLine(run: BurrowRun, genreName: string, rackSize: number)
   if (run.ended === 'bedrock') {
     const depth = run.floors.length;
     const full = last && last.after.length >= MAX_SLOTS;
+    // "shallow" is only said of ground that gave out early; a long descent simply reaches the end of the rack
+    const rack = `${rackSize} spice${rackSize === 1 ? '' : 's'} on its rack and ${depth ? 'the loop has used what fits' : 'none of them fits this loop'}`;
     const ground = full
       ? `Bedrock: the loop is ${MAX_SLOTS} chords long and there is no room left to dig.`
-      : `Bedrock: ${genreName} is shallow ground, ${rackSize} spice${rackSize === 1 ? '' : 's'} on its rack and ${depth ? 'the loop has used what fits' : 'none of them fits this loop'}.`;
+      : depth < SHALLOW
+        ? `Bedrock: ${genreName} is shallow ground, ${rack}.`
+        : `Bedrock: ${genreName} has ${rack}.`;
     if (!depth) return { title, text: `At the surface. ${ground} Nothing to land; try another loop or genre.` };
     return { title, text: `Floor ${depth}, ${strataName(depth)}. ${ground} Everything the crab dug is on the bench.` };
   }
