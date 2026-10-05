@@ -4,7 +4,7 @@
    Teaching text is set in a serif; labels are typed in mono capitals. */
 
 :root {
-  --desk: #cbc1a9;
+  --desk: #b7c9b1;         /* sage: what the notebook lies on */
   --paper: #f6f0e2;
   --paper-2: #ede5d1;
   --paper-3: #e1d8c1;

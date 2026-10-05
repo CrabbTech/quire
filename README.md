@@ -15,12 +15,12 @@
 </p>
 
 <p align="center">
-  <img alt="Tauri 2" src="https://img.shields.io/badge/Tauri-2-cbc1a9?style=flat-square&logo=tauri&logoColor=f6f0e2&labelColor=1d1b17">
-  <img alt="React 19" src="https://img.shields.io/badge/React-19-cbc1a9?style=flat-square&logo=react&logoColor=f6f0e2&labelColor=1d1b17">
-  <img alt="TypeScript, strict" src="https://img.shields.io/badge/TypeScript-strict-cbc1a9?style=flat-square&logo=typescript&logoColor=f6f0e2&labelColor=1d1b17">
-  <img alt="Rust: Core Audio and CoreMIDI" src="https://img.shields.io/badge/Rust-Core%20Audio%20%C2%B7%20CoreMIDI-cbc1a9?style=flat-square&logo=rust&logoColor=f6f0e2&labelColor=1d1b17">
-  <img alt="Platform: macOS" src="https://img.shields.io/badge/platform-macOS-cbc1a9?style=flat-square&logo=apple&logoColor=f6f0e2&labelColor=1d1b17">
-  <a href="LICENSE"><img alt="Licence: MIT" src="https://img.shields.io/badge/licence-MIT-cbc1a9?style=flat-square&labelColor=1d1b17"></a>
+  <img alt="Tauri 2" src="https://img.shields.io/badge/Tauri-2-b7c9b1?style=flat-square&logo=tauri&logoColor=f6f0e2&labelColor=1d1b17">
+  <img alt="React 19" src="https://img.shields.io/badge/React-19-b7c9b1?style=flat-square&logo=react&logoColor=f6f0e2&labelColor=1d1b17">
+  <img alt="TypeScript, strict" src="https://img.shields.io/badge/TypeScript-strict-b7c9b1?style=flat-square&logo=typescript&logoColor=f6f0e2&labelColor=1d1b17">
+  <img alt="Rust: Core Audio and CoreMIDI" src="https://img.shields.io/badge/Rust-Core%20Audio%20%C2%B7%20CoreMIDI-b7c9b1?style=flat-square&logo=rust&logoColor=f6f0e2&labelColor=1d1b17">
+  <img alt="Platform: macOS" src="https://img.shields.io/badge/platform-macOS-b7c9b1?style=flat-square&logo=apple&logoColor=f6f0e2&labelColor=1d1b17">
+  <a href="LICENSE"><img alt="Licence: MIT" src="https://img.shields.io/badge/licence-MIT-b7c9b1?style=flat-square&labelColor=1d1b17"></a>
 </p>
 
 <p align="center"><a href="https://crabbtech.github.io/quire/"><b>Open it in your browser</b></a> · <a href="#run-it">Run it</a> · <a href="docs/features.md">The complete tour</a> · <a href="#how-it-is-built">How it is built</a> · <a href="docs/guide.md">A quick guide</a></p>
@@ -65,7 +65,7 @@ OP-1 field's two-octave keyboard. It is the software version of those die-cut
 <p align="center"><sub>The inside cover, opened from the wordmark: the gloss, a plate, whose journal it is, every keyboard shortcut, and a colophon.</sub></p>
 </details>
 
-**The look.** An open notebook on a desk: a two-page spread with a stitched
+**The look.** An open notebook on a sage desk: a two-page spread with a stitched
 gutter, cream paper with a faint dot grid, a vermilion margin rule, running
 heads and folios. The spread fills the window and stays put; each page scrolls
 on its own between its head and its foot, so the transport and the journal are

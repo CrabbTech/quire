@@ -433,7 +433,7 @@ drums. Click any chord to hear it, or play the whole loop.
 
 ## The journal and the look
 
-An open notebook on a desk. Two pages in a spread with a stitched gutter, cream
+An open notebook on a sage desk. Two pages in a spread with a stitched gutter, cream
 paper with a faint dot grid, a vermilion margin rule, running heads (the crab
 and the wordmark on the left page, today's date on the right), folios in the
 feet, and index tabs along the top for Learn, Jam and Write. Teaching text is
