@@ -228,17 +228,43 @@ impl AudioEngine {
         let channels = config.channels();
         let window = if low { 4096 } else { 2048 };
         let (tx, rx) = mpsc::channel::<Msg>();
-        // the thread owns the stream: cpal streams need not be Sync, and this way one thread does all the talking
-        let stream = build_stream(&device, &config, pick, tx.clone())?;
-        stream.play().map_err(|e| e.to_string())?;
+        // the thread owns the stream from the moment it exists: a Core Audio stream cannot be
+        // sent between threads (cpal's macOS `Stream` is not `Send`), so it is opened on the
+        // thread that keeps it, and whether opening worked comes back over a one-shot channel
+        let (opened_tx, opened_rx) = mpsc::channel::<Result<(), String>>();
+        let sample_tx = tx.clone();
         let thread_name = name.clone();
         let handle = thread::Builder::new()
             .name("quire-ears".into())
             .spawn(move || {
-                let _keep = stream;
+                let stream = match build_stream(&device, &config, pick, sample_tx) {
+                    Ok(stream) => stream,
+                    Err(e) => {
+                        let _ = opened_tx.send(Err(e));
+                        return;
+                    }
+                };
+                if let Err(e) = stream.play() {
+                    let _ = opened_tx.send(Err(e.to_string()));
+                    return;
+                }
+                let _ = opened_tx.send(Ok(()));
                 analyse(app, rx, sample_rate as f32, low, thread_name);
+                // the stream closes on the thread that opened it, after the last look at the window
+                drop(stream);
             })
             .map_err(|e| e.to_string())?;
+        match opened_rx.recv() {
+            Ok(Ok(())) => {}
+            Ok(Err(e)) => {
+                let _ = handle.join();
+                return Err(e);
+            }
+            Err(_) => {
+                let _ = handle.join();
+                return Err("audio thread stopped before the stream opened".to_string());
+            }
+        }
         self.worker = Some((tx, handle));
         Ok(AudioStarted { device: name, sample_rate, channels, window, hop: HOP })
     }

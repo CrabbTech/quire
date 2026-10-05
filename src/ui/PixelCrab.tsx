@@ -2,7 +2,7 @@
 // the stylesheet. `size` is the rendered width; the grid never blurs.
 // `walking` draws both frames and lets a steps() animation show them in turn.
 
-import { CRAB_FRAMES, CRAB_H, CRAB_W } from './pixelCrab';
+import { CRAB_FRAMES, CRAB_H, CRAB_W } from './crabPixels';
 
 function Frames({ walking }: { walking: boolean }) {
   return (

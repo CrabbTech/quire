@@ -51,7 +51,7 @@ snapshot leaves around the spine, the new one arrives, forward or back
 depending on page order (`data-turn` on `<html>`); the active tab morphs.
 New journal lines ink in (clip-path sweep); stamps and grades thump in; the
 active chord's symbol gets an underline drawn beneath it; ticks draw
-themselves. The crab has a **second frame** (`src/ui/pixelCrab.ts`,
+themselves. The crab has a **second frame** (`src/ui/crabPixels.ts`,
 `HALF_UP` / `HALF_DOWN`, hand-placed): with `walking`, a steps() animation
 alternates the frames — the wordmark crab walks while the band plays and the
 Möbius cursor walks the strip. `prefers-reduced-motion` turns all of it off.

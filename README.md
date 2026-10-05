@@ -113,7 +113,7 @@ typed in IBM Plex Mono capitals; the wordmark is Silkscreen. Harmonic function
 chord tone / colour / passing / rub / spice) keep their own inks because they
 mean something.
 
-The only decoration is a 32×24 pixel crab, hand-placed (`src/ui/pixelCrab.ts`)
+The only decoration is a 32×24 pixel crab, hand-placed (`src/ui/crabPixels.ts`)
 in two frames, drawn as SVG rects so it stays crisp and takes its colours from
 the page — it is the wordmark (walking while the band plays), the app icon,
 the canon's cursor on the Möbius strip, the verdict's rating, and the stamp
