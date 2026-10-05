@@ -2,7 +2,7 @@
 // time it said it, today and the days before), what could come next (by
 // intention), and the full palette of the key.
 
-import { CSSProperties, useRef } from 'react';
+import { CSSProperties, useRef, useState } from 'react';
 import { useApp } from '../state/AppContext';
 import { chordSymbol } from '../theory/chords';
 import { keyLabel } from '../theory/progression';
@@ -11,6 +11,9 @@ import { INTENTS } from '../theory/suggest';
 import { styleChord } from '../state/reducer';
 import { journalDays } from '../state/journal';
 import { timeLabel } from '../state/dates';
+
+/** How many lines the journal shows before the rest are folded away: the page scrolls, the journal inside it does not. */
+const JOURNAL_OPEN_AT = 6;
 
 export function NextChordPanel() {
   const { nextOptions, addNextChord, realized } = useApp();
@@ -44,11 +47,17 @@ export function NextChordPanel() {
   );
 }
 
-export function JournalPanel() {
+export function JournalPanel({ firstPage = false }: { /** on a journal with nothing in it yet, say what will be written here */ firstPage?: boolean }) {
   const { journal } = useApp();
   // lines written since this page was opened — or in the moments before it opened, as a descent of the burrow lands — ink in; older ones are simply there
   const opened = useRef(new Set(journal.filter((e) => e.at < Date.now() - 4000).map((e) => e.id)));
-  const days = journalDays(journal);
+  const [unfolded, setUnfolded] = useState(false);
+  const allDays = journalDays(journal);
+  let room = unfolded ? Infinity : JOURNAL_OPEN_AT;
+  const days = allDays
+    .map((d) => { const entries = d.entries.slice(0, Math.max(0, room)); room -= entries.length; return { ...d, entries }; })
+    .filter((d) => d.entries.length);
+  const folded = journal.length - days.reduce((n, d) => n + d.entries.length, 0);
   // lines that landed together (a descent of the burrow) ink in one after another, oldest first
   const freshOrder = new Map(journal.filter((e) => !opened.current.has(e.id)).map((e, i) => [e.id, i] as const));
   return (
@@ -61,6 +70,11 @@ export function JournalPanel() {
       </div>
       <div className="journal">
         {!days.length && <div className="journal-empty">Nothing written yet. Spice a chord, pick what comes next, mirror the song — the reasons land here.</div>}
+        {firstPage && !journal.some((e) => e.kind === 'spice') && journal.length <= 2 && (
+          <div className="journal-first">
+            <strong>The first page.</strong> Press play (or space) and listen to the loop once. Then press <em>Spice it up</em>: one chord changes, and why it works is written here, with the time it was said.
+          </div>
+        )}
         {days.map((d, di) => (
           <div key={d.day} className="journal-day">
             {(di > 0 || d.label !== 'Today') && <div className="journal-dayhead">{d.label}</div>}
@@ -74,6 +88,11 @@ export function JournalPanel() {
             ))}
           </div>
         ))}
+        {(folded > 0 || unfolded) && journal.length > JOURNAL_OPEN_AT && (
+          <button className="journal-more" onClick={() => setUnfolded(!unfolded)}>
+            {unfolded ? 'Fold the earlier lines away' : `Earlier in the journal · ${folded} more line${folded === 1 ? '' : 's'}`}
+          </button>
+        )}
       </div>
     </section>
   );

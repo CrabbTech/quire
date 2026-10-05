@@ -1,5 +1,10 @@
 // The progression bench: the cards, the arrows between them, and — in Write —
 // every tool that changes the chords. Jam shows the same cards as a chart.
+// Above the cards there is one row: what changes the loop on the left (spice,
+// heat, undo, A/B, reset), what takes it away on the right (tab, MIDI, save).
+// Where a loop comes from (compose, a named progression, a new one) sits beside
+// its name in the heading; how it is practised (count-in, ramp, the band) is
+// the strip under the cards.
 
 import { Fragment } from 'react';
 import { useApp } from '../state/AppContext';
@@ -31,7 +36,7 @@ export function ProgressionPanel({ editing }: { editing: boolean }) {
           </div>
         </div>
         {editing && (
-          <div className="panel-actions">
+          <div className="panel-actions bench-source">
             <button className="btn" onClick={() => app.setModal('compose')}>Compose</button>
             <select className="tpl-select"
               value={templatesForMode.some((t) => t.name === state.templateName) ? state.templateName : ''}
@@ -47,6 +52,12 @@ export function ProgressionPanel({ editing }: { editing: boolean }) {
               ))}
             </select>
             <button className="btn" onClick={() => dispatch({ type: 'new-progression', genre })}>New</button>
+          </div>
+        )}
+      </div>
+      {editing && (
+        <div className="bench-row">
+          <div className="panel-actions">
             <button className="btn btn-spice" onClick={app.spiceItUp}>Spice it up</button>
             <div className="seg heat-seg">
               {([1, 2, 3] as const).map((h) => (
@@ -58,15 +69,16 @@ export function ProgressionPanel({ editing }: { editing: boolean }) {
               {ab ? '■ A/B' : 'A/B'}
             </button>
             <button className="btn" onClick={() => dispatch({ type: 'reset-spice' })} disabled={state.slots === state.baseSlots && state.modulate === null}>Reset</button>
-            {state.instrument === 'guitar' && <button className="btn" onClick={app.copyTab}>{copied === 'tab' ? 'Copied' : 'Copy tab'}</button>}
-            {state.instrument === 'bass' && <button className="btn" onClick={app.copyBassTab}>{copied === 'tab' ? 'Copied' : 'Copy tab'}</button>}
-            {(state.instrument === 'piano' || state.instrument === 'op1') && <button className="btn" onClick={app.copyChart}>{copied === 'chart' ? 'Copied' : 'Copy chart'}</button>}
-            <button className="btn" onClick={app.exportMidi}>{copied === 'midi' ? 'Saved' : 'MIDI'}</button>
-            <button className="btn" onClick={app.saveToLibrary}>{copied === 'saved' ? 'Saved' : 'Save'}</button>
           </div>
-        )}
-      </div>
-      <PracticeStrip />
+          <div className="panel-actions bench-out">
+            {state.instrument === 'guitar' && <button className="btn btn-quiet" onClick={app.copyTab}>{copied === 'tab' ? 'Copied' : 'Copy tab'}</button>}
+            {state.instrument === 'bass' && <button className="btn btn-quiet" onClick={app.copyBassTab}>{copied === 'tab' ? 'Copied' : 'Copy tab'}</button>}
+            {(state.instrument === 'piano' || state.instrument === 'op1') && <button className="btn btn-quiet" onClick={app.copyChart}>{copied === 'chart' ? 'Copied' : 'Copy chart'}</button>}
+            <button className="btn btn-quiet" onClick={app.exportMidi}>{copied === 'midi' ? 'Saved' : 'MIDI'}</button>
+            <button className="btn btn-quiet" onClick={app.saveToLibrary}>{copied === 'saved' ? 'Saved' : 'Save'}</button>
+          </div>
+        </div>
+      )}
       <div className="cards">
         {realized.map((r, i) => (
           <Fragment key={r.slot.id}>
@@ -123,6 +135,7 @@ export function ProgressionPanel({ editing }: { editing: boolean }) {
           {transposeNow ? 'Up a whole step: ' : 'Every other pass goes up a whole step: '}<strong>{modulatedPreview}</strong>
         </div>
       )}
+      <PracticeStrip />
     </section>
   );
 }

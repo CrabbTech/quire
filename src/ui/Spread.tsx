@@ -1,6 +1,10 @@
 // The open book: two pages and the gutter between them. The left page carries
 // the wordmark and the transport in its running head, the right page today's
 // date; each has a folio at the foot. Views only decide what goes on the pages.
+// The spread fills the window and stays put: what is on a page scrolls between
+// its head and its foot (.page-scroll), each page on its own, so the transport
+// and the journal are always in reach. On a narrow desk the pages stack and the
+// window scrolls instead.
 
 import { ReactNode } from 'react';
 import { useApp } from '../state/AppContext';
@@ -90,7 +94,7 @@ export function Spread({ left, right, folio }: { left: ReactNode; right: ReactNo
     <>
       <div className="page page-left">
         <HeadLeft />
-        <div className="page-body">{left}</div>
+        <div className="page-body"><div className="page-scroll">{left}</div></div>
         <footer className="running-foot">
           <span className="foot-note">{SHORTCUTS[state.view]}{inputSource === 'qwerty' ? ' · letter shortcuts pause while the keyboard is a piano' : ''}</span>
           <span className="folio">{folio}</span>
@@ -99,7 +103,7 @@ export function Spread({ left, right, folio }: { left: ReactNode; right: ReactNo
       <div className="gutter" aria-hidden="true" />
       <div className="page page-right">
         <HeadRight />
-        <div className="page-body">{right}</div>
+        <div className="page-body"><div className="page-scroll">{right}</div></div>
         <footer className="running-foot">
           <span className="folio">{folio + 1}</span>
           <span className="foot-note">{dayOfYear(now)} of {daysInYear(now)}</span>
