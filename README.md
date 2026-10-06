@@ -221,9 +221,8 @@ takes three steps.
 
 ## Where it came from
 
-Quire began as Spicerack 2, the second app in
-[CrabbTech/spicerack](https://github.com/CrabbTech/spicerack), where the earlier
-version and its history still live; it moved into this repository with its
+Quire began as Spicerack 2, the second app in the author's earlier `spicerack`
+repository (since made private); it moved into this repository with its
 history preserved. It was built by Tyler Crabb, working with an AI coding agent
 (Claude Code); the commit history shows it.
 

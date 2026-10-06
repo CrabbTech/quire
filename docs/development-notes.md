@@ -3,9 +3,8 @@
 These are working notes, written at the end of each development session for
 whoever picked the work up next, and kept as a record of why things are the
 way they are. They stand as they were written, oldest first, except that paths
-now match this repository: Quire used to live in `v2/` of
-[CrabbTech/spicerack](https://github.com/CrabbTech/spicerack), and that prefix
-is gone. Branch names such as `claude/spicerack-journal-redesign-swzb1h` and
+now match this repository: Quire used to live in `v2/` of the
+earlier `spicerack` repository (since made private), and that prefix is gone. Branch names such as `claude/spicerack-journal-redesign-swzb1h` and
 `claude/quire-mac-app` refer to that original repository. Test counts are as
 they stood at the time; the suite has since grown to 278. The desk these
 notes call `#cbc1a9` is now sage, `#b7c9b1`.
